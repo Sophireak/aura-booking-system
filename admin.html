@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Studio — Staff Front Desk &amp; Appointment Admin Portal</title>
+  <meta name="description" content="Front Desk Staff Management Portal for Aura Studio. Approve, reschedule, and manage client bookings in real-time.">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Kantumruy Pro (Khmer) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --primary: #9333ea;
+      --primary-light: #f3e8ff;
+      --primary-dark: #7e22ce;
+      --secondary: #0f172a;
+      --surface: #ffffff;
+      --bg-body: #f8fafc;
+      --border: #e2e8f0;
+      --accent-telegram: #229ed9;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--secondary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .khmer-font {
+      font-family: 'Kantumruy Pro', sans-serif;
+    }
+
+    /* Admin Navbar */
+    .admin-navbar {
+      background: #1e1b4b;
+      color: white;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brand-logo-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+    }
+
+    /* Stat Cards */
+    .stat-card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+    }
+
+    /* Appointment Card */
+    .apt-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .apt-card:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      border-color: #cbd5e1;
+    }
+
+    .apt-card.pending {
+      border-left: 5px solid #f59e0b;
+    }
+
+    .apt-card.confirmed {
+      border-left: 5px solid #3b82f6;
+    }
+
+    .apt-card.completed {
+      border-left: 5px solid #10b981;
+    }
+
+    .apt-card.cancelled {
+      border-left: 5px solid #ef4444;
+      opacity: 0.7;
+    }
+
+    /* Action Buttons */
+    .btn-action {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+
+    /* Login Screen Modal/Card */
+    .login-wrapper {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 420px;
+      width: 100%;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    /* Filter Pills */
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+
+    .filter-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-pill {
+      padding: 7px 18px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .filter-pill.active {
+      background: #1e1b4b;
+      color: white;
+      border-color: #1e1b4b;
+    }
+
+    @media (max-width: 576px) {
+      .login-box {
+        padding: 28px 20px;
+      }
+      .stat-card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Admin Navbar -->
+  <header class="admin-navbar sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <div class="brand-logo-badge">
+          <i class="bi bi-flower1"></i>
+        </div>
+        <div>
+          <span class="fw-bold fs-6">Aura Studio</span>
+          <span class="badge bg-primary-subtle text-primary ms-1">Front Desk Portal</span>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <a href="index.html" class="text-white-50 text-decoration-none small d-none d-sm-inline">
+          <i class="bi bi-box-arrow-up-right me-1"></i> View Client Site
+        </a>
+        <button id="btnLogout" class="btn btn-outline-light btn-sm d-none" onclick="adminLogout()">
+          <i class="bi bi-box-arrow-right me-1"></i> Sign Out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login View (When Not Authenticated) -->
+  <div id="loginView" class="login-wrapper">
+    <div class="login-box">
+      <div class="brand-logo-badge mx-auto mb-3" style="width: 54px; height: 54px; font-size: 1.5rem;">
+        <i class="bi bi-shield-lock-fill"></i>
+      </div>
+      <h4 class="fw-bold mb-1">Staff Access</h4>
+      <p class="text-muted small mb-4 khmer-font">សូមបញ្ចូលលេខកូដសម្ងាត់បុគ្គលិកដើម្បីគ្រប់គ្រងការកក់</p>
+
+      <form onsubmit="handleLogin(event)">
+        <div class="mb-3 text-start">
+          <label class="form-label small fw-bold text-muted text-uppercase">Staff Passcode</label>
+          <div class="input-group input-group-lg">
+            <span class="input-group-text bg-light"><i class="bi bi-key-fill text-muted"></i></span>
+            <input type="password" class="form-control" id="passcodeInput" placeholder="Enter PIN / Passcode" required>
+          </div>
+          <div class="alert alert-info py-2 px-3 small mt-3 mb-0">
+            <i class="bi bi-info-circle-fill me-1"></i> Demo Passcode: <strong class="text-primary font-monospace">aura2026</strong>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3" id="btnLogin">
+          <i class="bi bi-unlock-fill me-1"></i> Sign In to Front Desk
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard Main View (When Authenticated) -->
+  <main id="dashboardView" class="container py-4 d-none">
+    <!-- Header with greeting & action -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+      <div>
+        <h3 class="fw-bold mb-1">Front Desk Schedule</h3>
+        <p class="text-muted small mb-0 khmer-font">
+          <i class="bi bi-geo-alt-fill text-danger me-1"></i> Battambang Main Studio · Real-time Telegram Dispatch Active
+        </p>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary btn-sm rounded-3" onclick="refreshAppointments()">
+          <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+        </button>
+        <button class="btn btn-primary btn-sm rounded-3 fw-bold" onclick="openWalkInModal()">
+          <i class="bi bi-plus-lg me-1"></i> Add Walk-In Client
+        </button>
+      </div>
+    </div>
+
+    <!-- Stat KPI Cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card d-flex align-items-center gap-3">
+          <div class="stat-icon bg-primary-subtle text-primary">
+            <i class="bi bi-calendar-event"></i>
+          </div>
+          <div>
+            <div class="text-muted small">Today's Total</div>
+            <h4 class="fw-bold mb-0" id="statTodayCount">0</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="stat-card d-flex align-items-center gap-3">
+          <div class="stat-icon bg-warning-subtle text-warning">
+            <i class="bi bi-hourglass-split"></i>
+          </div>
+          <div>
+            <div class="text-muted small">Pending Review</div>
+            <h4 class="fw-bold mb-0 text-warning" id="statPendingCount">0</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="stat-card d-flex align-items-center gap-3">
+          <div class="stat-icon bg-info-subtle text-info">
+            <i class="bi bi-check-circle"></i>
+          </div>
+          <div>
+            <div class="text-muted small">Confirmed</div>
+            <h4 class="fw-bold mb-0 text-info" id="statConfirmedCount">0</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="stat-card d-flex align-items-center gap-3">
+          <div class="stat-icon bg-success-subtle text-success">
+            <i class="bi bi-cash-stack"></i>
+          </div>
+          <div>
+            <div class="text-muted small">Est. Revenue</div>
+            <h4 class="fw-bold mb-0 text-success" id="statEstRevenue">$0</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Pills & Search -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+      <div class="filter-pills">
+        <button class="filter-pill active" onclick="setFilter('all')">All Bookings</button>
+        <button class="filter-pill" onclick="setFilter('today')">Today's Schedule</button>
+        <button class="filter-pill" onclick="setFilter('pending')">Pending Only</button>
+        <button class="filter-pill" onclick="setFilter('confirmed')">Confirmed</button>
+        <button class="filter-pill" onclick="setFilter('completed')">Completed</button>
+      </div>
+
+      <div style="max-width: 260px; width: 100%;">
+        <div class="input-group input-group-sm">
+          <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+          <input type="text" class="form-control" id="searchInput" placeholder="Search by name, phone, ref..." oninput="handleSearch()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Appointments Feed List -->
+    <div id="appointmentsContainer">
+      <!-- Dynamically populated appointment cards -->
+    </div>
+
+  </main>
+
+  <!-- Walk-In Client Modal -->
+  <div class="modal fade" id="walkInModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title fw-bold">New Walk-In Appointment</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form onsubmit="saveWalkIn(event)">
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted text-uppercase">Client Name / ឈ្មោះ</label>
+              <input type="text" class="form-control" id="walkInName" placeholder="Client full name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted text-uppercase">Client Phone / លេខទូរស័ព្ទ</label>
+              <input type="tel" class="form-control" id="walkInPhone" placeholder="012 345 678" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted text-uppercase">Service / សេវាកម្ម</label>
+              <select class="form-select" id="walkInService">
+                <option value="Hydra-Glow Facial Therapy" data-price="$28">Hydra-Glow Facial Therapy — $28</option>
+                <option value="Signature Hair Cut & Wash" data-price="$12">Signature Hair Cut &amp; Wash — $12</option>
+                <option value="Korean Keratin Treatment" data-price="$35">Korean Keratin Treatment — $35</option>
+                <option value="Luxury Gel Nail Art & Pedicure" data-price="$18">Luxury Gel Nail Art &amp; Pedicure — $18</option>
+                <option value="Herbal Aromatherapy Massage" data-price="$30">Herbal Aromatherapy Massage — $30</option>
+                <option value="Acne Clarifying & Calming Detox" data-price="$22">Acne Clarifying &amp; Calming Detox — $22</option>
+              </select>
+            </div>
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted text-uppercase">Date</label>
+                <input type="date" class="form-control" id="walkInDate" required>
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted text-uppercase">Time Slot</label>
+                <select class="form-select" id="walkInSlot">
+                  <option value="Now / Walk-In">Now / Walk-In</option>
+                  <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                  <option value="01:30 PM - 02:30 PM">01:30 PM - 02:30 PM</option>
+                  <option value="03:30 PM - 04:30 PM">03:30 PM - 04:30 PM</option>
+                  <option value="05:30 PM - 06:30 PM">05:30 PM - 06:30 PM</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-muted text-uppercase">Specialist</label>
+              <select class="form-select" id="walkInSpecialist">
+                <option value="Any Available Specialist">Any Available Specialist</option>
+                <option value="Bopha (Senior Esthetician)">Bopha (Esthetician)</option>
+                <option value="Dara (Hair Director)">Dara (Hair Director)</option>
+                <option value="Lin (Nail Artist)">Lin (Nail Artist)</option>
+                <option value="Srey Mao (Massage Therapist)">Srey Mao (Massage)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
+              Save &amp; Confirm Walk-In
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Admin Portal App Logic -->
+  <script>
+    const DEFAULT_SEED_DATA = [
+      {
+        id: 'AUR-8412',
+        customerName: 'Sokha Mean',
+        customerPhone: '012 884 921',
+        customerTelegram: 'sokha_m',
+        serviceName: 'Hydra-Glow Facial Therapy',
+        servicePrice: '$28 (~115,000៛)',
+        branch: 'Battambang Main Studio',
+        date: new Date().toISOString().split('T')[0],
+        timeSlot: '10:00 AM - 11:00 AM',
+        specialist: 'Bopha (Senior Esthetician)',
+        notes: 'Sensitive skin, prefer organic serums',
+        paymentMethod: 'Pay at Counter (Cash / KHQR)',
+        status: 'confirmed',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'AUR-7290',
+        customerName: 'Channary Piseth',
+        customerPhone: '098 451 209',
+        customerTelegram: 'channary_p',
+        serviceName: 'Signature Hair Cut & Wash',
+        servicePrice: '$12 (~49,000៛)',
+        branch: 'Battambang Main Studio',
+        date: new Date().toISOString().split('T')[0],
+        timeSlot: '01:30 PM - 02:30 PM',
+        specialist: 'Dara (Hair Director)',
+        notes: 'Requested layered bob cut',
+        paymentMethod: 'Pay at Counter (Cash / KHQR)',
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'AUR-6104',
+        customerName: 'Kosal Heng',
+        customerPhone: '070 339 811',
+        customerTelegram: '',
+        serviceName: 'Herbal Aromatherapy Massage',
+        servicePrice: '$30 (~123,000៛)',
+        branch: 'Battambang Main Studio',
+        date: new Date().toISOString().split('T')[0],
+        timeSlot: '05:00 PM - 06:15 PM',
+        specialist: 'Srey Mao (Massage Therapist)',
+        notes: 'Shoulder relief focus',
+        paymentMethod: 'Pay at Counter (Cash / KHQR)',
+        status: 'confirmed',
+        createdAt: new Date().toISOString()
+      }
+    ];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let walkInModalInstance = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      walkInModalInstance = new bootstrap.Modal(document.getElementById('walkInModal'));
+      document.getElementById('walkInDate').value = new Date().toISOString().split('T')[0];
+      checkAuth();
+    });
+
+    function checkAuth() {
+      const token = localStorage.getItem('aura_admin_token');
+      if (token) {
+        document.getElementById('loginView').classList.add('d-none');
+        document.getElementById('dashboardView').classList.remove('d-none');
+        document.getElementById('btnLogout').classList.remove('d-none');
+        loadAppointments();
+      } else {
+        document.getElementById('loginView').classList.remove('d-none');
+        document.getElementById('dashboardView').classList.add('d-none');
+        document.getElementById('btnLogout').classList.add('d-none');
+      }
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const pin = document.getElementById('passcodeInput').value.trim();
+
+      if (pin === 'aura2026' || pin === '123456') {
+        localStorage.setItem('aura_admin_token', 'aura_session_' + Date.now());
+        checkAuth();
+      } else {
+        alert('Incorrect passcode. For the demo, use: aura2026');
+      }
+    }
+
+    function adminLogout() {
+      localStorage.removeItem('aura_admin_token');
+      checkAuth();
+    }
+
+    function getStoredAppointments() {
+      try {
+        const stored = localStorage.getItem('aura_appointments');
+        if (!stored) {
+          localStorage.setItem('aura_appointments', JSON.stringify(DEFAULT_SEED_DATA));
+          return DEFAULT_SEED_DATA;
+        }
+        return JSON.parse(stored);
+      } catch (e) {
+        return DEFAULT_SEED_DATA;
+      }
+    }
+
+    function setStoredAppointments(data) {
+      localStorage.setItem('aura_appointments', JSON.stringify(data));
+    }
+
+    function loadAppointments() {
+      const appointments = getStoredAppointments();
+      renderDashboardStats(appointments);
+      renderAppointmentsFeed(appointments);
+    }
+
+    function refreshAppointments() {
+      loadAppointments();
+    }
+
+    function renderDashboardStats(list) {
+      const todayISO = new Date().toISOString().split('T')[0];
+      let todayCount = 0;
+      let pendingCount = 0;
+      let confirmedCount = 0;
+      let totalRev = 0;
+
+      list.forEach(a => {
+        if (a.date === todayISO && a.status !== 'cancelled') todayCount++;
+        if (a.status === 'pending') pendingCount++;
+        if (a.status === 'confirmed') confirmedCount++;
+
+        // Calculate revenue
+        if (a.status !== 'cancelled') {
+          const match = a.servicePrice.match(/\$(\d+)/);
+          if (match) totalRev += parseInt(match[1], 10);
+        }
+      });
+
+      document.getElementById('statTodayCount').innerText = todayCount;
+      document.getElementById('statPendingCount').innerText = pendingCount;
+      document.getElementById('statConfirmedCount').innerText = confirmedCount;
+      document.getElementById('statEstRevenue').innerText = `$${totalRev}`;
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderAppointmentsFeed(getStoredAppointments());
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+      renderAppointmentsFeed(getStoredAppointments());
+    }
+
+    function renderAppointmentsFeed(all) {
+      const container = document.getElementById('appointmentsContainer');
+      container.innerHTML = '';
+
+      const todayISO = new Date().toISOString().split('T')[0];
+
+      let filtered = all.filter(item => {
+        // Status filter
+        if (currentFilter === 'today' && item.date !== todayISO) return false;
+        if (currentFilter === 'pending' && item.status !== 'pending') return false;
+        if (currentFilter === 'confirmed' && item.status !== 'confirmed') return false;
+        if (currentFilter === 'completed' && item.status !== 'completed') return false;
+
+        // Search query
+        if (searchQuery) {
+          const searchable = `${item.id} ${item.customerName} ${item.customerPhone} ${item.serviceName}`.toLowerCase();
+          if (!searchable.includes(searchQuery)) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-5 bg-white rounded-4 border">
+            <i class="bi bi-inbox text-muted fs-1 mb-2 d-block"></i>
+            <h6 class="text-muted fw-bold">No appointments found matching this filter.</h6>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(apt => {
+        const card = document.createElement('div');
+        card.className = `apt-card ${apt.status}`;
+
+        let badgeHtml = '';
+        if (apt.status === 'pending') {
+          badgeHtml = '<span class="badge bg-warning text-dark fw-bold"><i class="bi bi-clock me-1"></i> Pending Approval</span>';
+        } else if (apt.status === 'confirmed') {
+          badgeHtml = '<span class="badge bg-primary fw-bold"><i class="bi bi-check-circle me-1"></i> Confirmed</span>';
+        } else if (apt.status === 'completed') {
+          badgeHtml = '<span class="badge bg-success fw-bold"><i class="bi bi-patch-check-fill me-1"></i> Completed</span>';
+        } else {
+          badgeHtml = '<span class="badge bg-danger fw-bold"><i class="bi bi-x-circle me-1"></i> Cancelled</span>';
+        }
+
+        const phoneClean = apt.customerPhone.replace(/\s+/g, '');
+        const tgLink = apt.customerTelegram
+          ? `https://t.me/${apt.customerTelegram.replace('@', '')}`
+          : `https://t.me/bNha_dev?text=Hi%20${encodeURIComponent(apt.customerName)},%20this%20is%20Aura%20Studio%20regarding%20your%20appointment%20${apt.id}`;
+
+        card.innerHTML = `
+          <div class="row align-items-center g-3">
+            <div class="col-lg-4 col-md-5">
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="fw-bold font-monospace text-primary small">${apt.id}</span>
+                ${badgeHtml}
+              </div>
+              <h5 class="fw-bold mb-0 text-dark">${apt.customerName}</h5>
+              <div class="d-flex align-items-center gap-2 mt-2">
+                <a href="tel:${phoneClean}" class="btn btn-sm btn-outline-dark btn-action">
+                  <i class="bi bi-telephone-fill text-success"></i> ${apt.customerPhone}
+                </a>
+                <a href="${tgLink}" target="_blank" class="btn btn-sm btn-outline-info btn-action" style="color: var(--accent-telegram);">
+                  <i class="bi bi-telegram"></i> Telegram
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+              <div class="fw-bold text-dark mb-1">${apt.serviceName}</div>
+              <div class="small text-muted mb-1">
+                <i class="bi bi-calendar3 text-primary me-1"></i> <strong>${apt.date}</strong> · ${apt.timeSlot}
+              </div>
+              <div class="small text-muted">
+                <i class="bi bi-person-badge me-1"></i> Stylist: <strong>${apt.specialist}</strong>
+              </div>
+              ${apt.notes ? `<div class="small text-muted fst-italic mt-1">Note: "${apt.notes}"</div>` : ''}
+            </div>
+
+            <div class="col-lg-4 col-md-3 text-lg-end">
+              <div class="fw-bold fs-5 text-primary mb-2">${apt.servicePrice}</div>
+              <div class="d-flex flex-wrap gap-1 justify-content-lg-end">
+                ${apt.status === 'pending' ? `
+                  <button class="btn btn-primary btn-sm btn-action" onclick="updateStatus('${apt.id}', 'confirmed')">
+                    <i class="bi bi-check-lg"></i> Approve
+                  </button>
+                ` : ''}
+                ${apt.status !== 'completed' && apt.status !== 'cancelled' ? `
+                  <button class="btn btn-success btn-sm btn-action" onclick="updateStatus('${apt.id}', 'completed')">
+                    <i class="bi bi-check-all"></i> Complete
+                  </button>
+                  <button class="btn btn-outline-danger btn-sm btn-action" onclick="updateStatus('${apt.id}', 'cancelled')">
+                    <i class="bi bi-x-lg"></i> Cancel
+                  </button>
+                ` : ''}
+                <button class="btn btn-outline-secondary btn-sm btn-action" onclick="deleteAppointment('${apt.id}')" title="Delete record">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function updateStatus(id, newStatus) {
+      const list = getStoredAppointments();
+      const apt = list.find(a => a.id === id);
+      if (apt) {
+        apt.status = newStatus;
+        setStoredAppointments(list);
+        loadAppointments();
+      }
+    }
+
+    function deleteAppointment(id) {
+      if (!confirm(`Are you sure you want to delete appointment ${id}?`)) return;
+      let list = getStoredAppointments();
+      list = list.filter(a => a.id !== id);
+      setStoredAppointments(list);
+      loadAppointments();
+    }
+
+    function openWalkInModal() {
+      walkInModalInstance.show();
+    }
+
+    function saveWalkIn(e) {
+      e.preventDefault();
+      const name = document.getElementById('walkInName').value.trim();
+      const phone = document.getElementById('walkInPhone').value.trim();
+      const serviceSelect = document.getElementById('walkInService');
+      const serviceName = serviceSelect.value;
+      const servicePrice = serviceSelect.options[serviceSelect.selectedIndex].dataset.price || '$25';
+      const date = document.getElementById('walkInDate').value;
+      const slot = document.getElementById('walkInSlot').value;
+      const specialist = document.getElementById('walkInSpecialist').value;
+
+      const randomCode = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const newBooking = {
+        id: `AUR-${randomCode}`,
+        customerName: name,
+        customerPhone: phone,
+        customerTelegram: '',
+        serviceName,
+        servicePrice,
+        branch: 'Battambang Main Studio',
+        date,
+        timeSlot: slot,
+        specialist,
+        notes: 'Walk-In Customer logged at desk',
+        paymentMethod: 'Pay at Counter (Cash / KHQR)',
+        status: 'confirmed',
+        createdAt: new Date().toISOString()
+      };
+
+      const list = getStoredAppointments();
+      list.unshift(newBooking);
+      setStoredAppointments(list);
+
+      walkInModalInstance.hide();
+      loadAppointments();
+    }
+  </script>
+</body>
+</html>

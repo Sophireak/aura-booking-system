@@ -1,0 +1,21 @@
+{
+  "name": "aura-booking-system",
+  "version": "1.0.0",
+  "description": "Mobile-First Booking & Appointment System with Staff Admin Portal for Cambodian Businesses",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx vercel dev"
+  },
+  "keywords": [
+    "booking-system",
+    "appointment-scheduler",
+    "cambodia-ux",
+    "telegram-bot",
+    "admin-dashboard",
+    "salon-spa",
+    "freelance-portfolio"
+  ],
+  "author": "Sophireak (@bNha_dev)",
+  "license": "MIT"
+}

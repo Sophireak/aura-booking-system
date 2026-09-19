@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Studio — Beauty, Hair & Wellness | Instant Booking Cambodia</title>
+  <meta name="description" content="Aura Beauty & Hair Studio in Battambang and Phnom Penh. Book your salon, facial, nail, and spa appointments online in 30 seconds with instant Telegram confirmations.">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Kantumruy Pro (Khmer) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --primary: #9333ea;
+      --primary-light: #f3e8ff;
+      --primary-dark: #7e22ce;
+      --secondary: #0f172a;
+      --accent-rose: #f43f5e;
+      --accent-telegram: #229ed9;
+      --accent-khqr: #dc2626;
+      --surface: #ffffff;
+      --bg-body: #faf5ff;
+      --border: #f1e4fb;
+      --border-subtle: #e2e8f0;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif;
+      color: var(--secondary);
+      background-color: #fafaf9;
+      overflow-x: hidden;
+      line-height: 1.6;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .khmer-font {
+      font-family: 'Kantumruy Pro', sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(147, 51, 234, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .brand-logo-badge {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+    }
+
+    .btn-aura {
+      background: linear-gradient(135deg, #9333ea, #c026d3);
+      color: white;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      padding: 12px 26px;
+      border: none;
+      box-shadow: 0 4px 16px rgba(147, 51, 234, 0.3);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-aura:hover {
+      background: linear-gradient(135deg, #7e22ce, #a21caf);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(147, 51, 234, 0.45);
+    }
+
+    .btn-telegram {
+      background-color: var(--accent-telegram);
+      color: white;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      padding: 10px 20px;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-telegram:hover {
+      background-color: #1b8cb8;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 70px 0 60px;
+      background: radial-gradient(circle at 85% 15%, #fce7f3 0%, #faf5ff 55%, #ffffff 100%);
+      position: relative;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fdf4ff;
+      color: #86198f;
+      border: 1px solid #f0abfc;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 50px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .hero-title {
+      font-size: 2.85rem;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.18;
+      color: #1e1b4b;
+    }
+
+    /* Category Filter Pills */
+    .category-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+
+    .category-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-pill {
+      padding: 8px 18px;
+      background: white;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .category-pill.active, .category-pill:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(147, 51, 234, 0.25);
+    }
+
+    /* Service Cards */
+    .service-card {
+      background: white;
+      border: 1px solid #f3e8ff;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: all 0.25s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(147, 51, 234, 0.08);
+      border-color: #d8b4fe;
+    }
+
+    .service-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+    }
+
+    .service-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .service-khr {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    /* Interactive Booking Drawer / Modal */
+    .booking-modal .modal-content {
+      border-radius: var(--radius-lg);
+      border: none;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .modal-header-aura {
+      background: linear-gradient(135deg, #9333ea, #db2777);
+      color: white;
+      padding: 22px 28px;
+      position: relative;
+    }
+
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #64748b;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .step-item.active .step-circle {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 0 0 4px var(--primary-light);
+    }
+
+    .step-item.completed .step-circle {
+      background: #10b981;
+      color: white;
+    }
+
+    .step-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 6px;
+      color: #64748b;
+    }
+
+    .step-item.active .step-label {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .step-line {
+      position: absolute;
+      top: 16px;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+
+    /* Date Carousel */
+    .date-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+
+    .date-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .date-card {
+      flex: 0 0 76px;
+      padding: 12px 8px;
+      text-align: center;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      cursor: pointer;
+      background: white;
+      transition: all 0.2s ease;
+    }
+
+    .date-card:hover {
+      border-color: var(--primary);
+      background: #faf5ff;
+    }
+
+    .date-card.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 6px 16px rgba(147, 51, 234, 0.28);
+    }
+
+    .date-card.active .text-muted, .date-card.active small {
+      color: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    /* Time Slot Buttons */
+    .slot-btn {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--secondary);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .slot-btn:hover:not(.booked) {
+      border-color: var(--primary);
+      background: #faf5ff;
+    }
+
+    .slot-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(147, 51, 234, 0.25);
+    }
+
+    .slot-btn.booked {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border-color: #e2e8f0;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    /* Phone Input Cambodia Style */
+    .kh-phone-prefix {
+      background: #f8fafc;
+      border-right: 1px solid var(--border-subtle);
+      font-weight: 700;
+      color: #334155;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Notice Card */
+    .payment-notice-card {
+      background: #fdf2f8;
+      border: 1px solid #fbcfe8;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      color: #9d174d;
+    }
+
+    /* Admin Quick Bar */
+    .admin-peek-bar {
+      background: #1e1b4b;
+      color: white;
+      padding: 10px 0;
+      font-size: 0.82rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.15rem;
+      }
+      .service-card {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-title {
+        font-size: 1.85rem;
+        letter-spacing: -0.6px;
+        line-height: 1.22;
+      }
+      .hero-section {
+        padding: 45px 0 30px;
+      }
+      .modal-header-aura {
+        padding: 18px 20px;
+      }
+      .btn-aura, .btn-telegram {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement & Admin Portal Shortcut -->
+  <div class="admin-peek-bar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div>
+        <span class="badge bg-danger me-2">KHQR Ready</span>
+        <span class="d-none d-sm-inline">Zero advance deposit required · Pay after service</span>
+        <span class="d-inline d-sm-none">Pay after service at counter</span>
+      </div>
+      <div>
+        <a href="admin.html" class="text-white text-decoration-none fw-bold small">
+          <i class="bi bi-shield-lock me-1"></i> Staff Admin Portal <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <div class="brand-logo-badge">
+          <i class="bi bi-flower1"></i>
+        </div>
+        <div>
+          <span class="fw-bold fs-5 text-dark">Aura</span>
+          <span class="fw-bold fs-5 text-primary">Studio</span>
+          <small class="d-block text-muted" style="font-size: 0.7rem; line-height: 1;">Beauty &amp; Wellness</small>
+        </div>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3 py-3 py-lg-0">
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#services">Services &amp; Pricing</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#branches">Locations</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#reviews">Reviews</a></li>
+          <li class="nav-item">
+            <a href="admin.html" class="nav-link fw-semibold text-primary">
+              <i class="bi bi-speedometer2 me-1"></i> Admin Login
+            </a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-aura" onclick="openBookingModal()">
+              <i class="bi bi-calendar2-check"></i> Book Appointment
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-4 g-lg-5">
+        <div class="col-lg-7">
+          <div class="status-pill mb-3">
+            <span class="status-dot"></span>
+            <span>Battambang &amp; Phnom Penh Branches · Open Daily 9:00 AM – 8:00 PM</span>
+          </div>
+
+          <h1 class="hero-title mb-3">
+            Premium Beauty &amp; Hair Care Without Waiting in Line.
+          </h1>
+
+          <p class="khmer-font text-primary fw-bold mb-3 fs-5">
+            កក់ម៉ោងធ្វើសក់ ស្ប៉ា និងថែទាំសម្រស់យ៉ាងរហ័ស មិនចាំបាច់បង្កើតគណនី · បញ្ជាក់ភ្លាមៗតាម Telegram
+          </p>
+
+          <p class="text-muted fs-5 mb-4">
+            Select your service, choose your preferred stylist, and pick your time slot in under 30 seconds. No passwords, no advance deposits required.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 mb-5">
+            <button class="btn btn-aura btn-lg" onclick="openBookingModal()">
+              <i class="bi bi-calendar2-heart"></i> Book Your Appointment Now
+            </button>
+            <a href="https://t.me/bNha_dev" target="_blank" class="btn btn-telegram btn-lg">
+              <i class="bi bi-telegram"></i> Chat on Telegram
+            </a>
+          </div>
+
+          <!-- Quick Trust Badges -->
+          <div class="row g-3 pt-3 border-top">
+            <div class="col-6 col-sm-3">
+              <div class="fw-bold fs-5 text-dark">0 Deposit</div>
+              <small class="text-muted">Pay after service</small>
+            </div>
+            <div class="col-6 col-sm-3">
+              <div class="fw-bold fs-5 text-primary">&lt; 30 sec</div>
+              <small class="text-muted">Fast self-booking</small>
+            </div>
+            <div class="col-6 col-sm-3">
+              <div class="fw-bold fs-5 text-success">Telegram</div>
+              <small class="text-muted">Instant reminders</small>
+            </div>
+            <div class="col-6 col-sm-3">
+              <div class="fw-bold fs-5 text-danger">KHQR</div>
+              <small class="text-muted">Bakong accepted</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <!-- Visual Booking Preview Card -->
+          <div class="bg-white p-4 rounded-4 shadow-sm border border-purple-subtle position-relative">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-2">
+                <i class="bi bi-clock-history me-1"></i> Live Available Slots Today
+              </span>
+              <span class="text-success small fw-bold"><i class="bi bi-circle-fill" style="font-size: 8px;"></i> 7 Slots Open</span>
+            </div>
+
+            <div class="p-3 bg-light rounded-3 mb-3 border">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold">Hydra-Glow Facial Therapy</span>
+                <span class="badge bg-primary">$28</span>
+              </div>
+              <small class="text-muted d-block mb-2"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Battambang Main Studio</small>
+              <div class="d-flex gap-2">
+                <span class="badge bg-white text-dark border">10:00 AM</span>
+                <span class="badge bg-primary text-white">02:30 PM (Popular)</span>
+                <span class="badge bg-white text-dark border">05:00 PM</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-light rounded-3 mb-4 border">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold">Hair Cut &amp; Gloss Treatment</span>
+                <span class="badge bg-primary">$18</span>
+              </div>
+              <small class="text-muted d-block mb-2"><i class="bi bi-person-badge text-primary me-1"></i> Stylist: Dara (Hair Director)</small>
+              <div class="d-flex gap-2">
+                <span class="badge bg-white text-dark border">11:30 AM</span>
+                <span class="badge bg-white text-dark border">04:00 PM</span>
+              </div>
+            </div>
+
+            <button class="btn btn-aura w-100 justify-content-center" onclick="openBookingModal()">
+              <i class="bi bi-plus-circle-fill me-1"></i> Click Here to Select Your Time
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Catalog & Pricing Menu -->
+  <section id="services" class="py-5 bg-white border-top border-bottom">
+    <div class="container py-4">
+      <div class="text-center max-w-700 mx-auto mb-4">
+        <span class="text-primary fw-bold text-uppercase small tracking-wide">Transparent Service Catalog</span>
+        <h2 class="fw-bold display-6 mt-1 mb-2">Our Signature Services &amp; Prices</h2>
+        <p class="text-muted khmer-font">តម្លៃច្បាស់លាស់ មិនមានគិតថ្លៃបន្ថែម · ជ្រើសរើសសេវាកម្មដើម្បីកក់ម៉ោងភ្លាមៗ</p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-pills justify-content-md-center mb-4">
+        <button class="category-pill active" onclick="filterServices('all')">All Services</button>
+        <button class="category-pill" onclick="filterServices('hair')">Hair Care &amp; Styling</button>
+        <button class="category-pill" onclick="filterServices('facial')">Skin &amp; Facial</button>
+        <button class="category-pill" onclick="filterServices('nails')">Nails &amp; Lashes</button>
+        <button class="category-pill" onclick="filterServices('spa')">Massage &amp; Spa</button>
+      </div>
+
+      <!-- Service Grid -->
+      <div class="row g-4" id="serviceCatalogGrid">
+        <!-- Service 1 -->
+        <div class="col-lg-4 col-md-6 service-item" data-category="hair">
+          <div class="service-card">
+            <div>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="service-icon-box">
+                  <i class="bi bi-scissors"></i>
+                </div>
+                <span class="badge bg-secondary-subtle text-secondary small">45 mins</span>
+              </div>
+              <h5 class="fw-bold mb-1">Signature Hair Cut &amp; Wash</h5>
+              <p class="khmer-font text-muted small mb-2">កាត់សក់ ម៉ូដទាន់សម័យ និងកក់សក់សម្រាកអារម្មណ៍</p>
+              <p class="text-muted small mb-3">Consultation, professional precision haircut, scalp massage wash, and blowout styling.</p>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <div class="service-price">$12</div>
+                <div class="service-khr">~49,000 ៛</div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm rounded-3 fw-bold" onclick="selectAndBook('Signature Hair Cut & Wash', '$12 (~49,000៛)', 45)">
+                Book This <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="col-lg-4 col-md-6 service-item" data-category="facial">
+          <div class="service-card border-primary" style="box-shadow: 0 10px 25px rgba(147, 51, 234, 0.08);">
+            <div>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="service-icon-box" style="background: #fdf2f8; color: #db2777;">
+                  <i class="bi bi-stars"></i>
+                </div>
+                <span class="badge bg-primary">Most Popular · 60 mins</span>
+              </div>
+              <h5 class="fw-bold mb-1">Hydra-Glow Facial Therapy</h5>
+              <p class="khmer-font text-muted small mb-2">ព្យាបាលស្បែកមុខជម្រៅជ្រៅ ផ្តល់សំណើម និងពន្លឺ</p>
+              <p class="text-muted small mb-3">Deep pore cleanse, ultrasonic exfoliation, organic vitamin serum infusion, and LED light therapy.</p>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <div class="service-price">$28</div>
+                <div class="service-khr">~115,000 ៛</div>
+              </div>
+              <button class="btn btn-aura btn-sm" onclick="selectAndBook('Hydra-Glow Facial Therapy', '$28 (~115,000៛)', 60)">
+                Book This <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="col-lg-4 col-md-6 service-item" data-category="hair">
+          <div class="service-card">
+            <div>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="service-icon-box">
+                  <i class="bi bi-brush"></i>
+                </div>
+                <span class="badge bg-secondary-subtle text-secondary small">90 mins</span>
+              </div>
+              <h5 class="fw-bold mb-1">Korean Keratin Treatment</h5>
+              <p class="khmer-font text-muted small mb-2">ព្យាបាលសក់ខូច ធ្វើឱ្យសក់រលោងទន់បែបកូរ៉េ</p>
+              <p class="text-muted small mb-3">Restores damaged, bleached or frizzy hair with organic keratin protein for silky, shiny hair.</p>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <div class="service-price">$35</div>
+                <div class="service-khr">~144,000 ៛</div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm rounded-3 fw-bold" onclick="selectAndBook('Korean Keratin Treatment', '$35 (~144,000៛)', 90)">
+                Book This <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="col-lg-4 col-md-6 service-item" data-category="nails">
+          <div class="service-card">
+            <div>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="service-icon-box" style="background: #ecfdf5; color: #059669;">
+                  <i class="bi bi-hand-index-thumb"></i>
+                </div>
+                <span class="badge bg-secondary-subtle text-secondary small">60 mins</span>
+              </div>
+              <h5 class="fw-bold mb-1">Luxury Gel Nail Art &amp; Pedicure</h5>
+              <p class="khmer-font text-muted small mb-2">លាបក្រចកជែល និងម៉ូដសិល្បៈក្រចកទំនើប</p>
+              <p class="text-muted small mb-3">Cuticle care, nail shaping, custom chrome or French nail art design, and organic moisturizing massage.</p>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <div class="service-price">$18</div>
+                <div class="service-khr">~74,000 ៛</div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm rounded-3 fw-bold" onclick="selectAndBook('Luxury Gel Nail Art & Pedicure', '$18 (~74,000៛)', 60)">
+                Book This <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="col-lg-4 col-md-6 service-item" data-category="spa">
+          <div class="service-card">
+            <div>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="service-icon-box" style="background: #fef3c7; color: #d97706;">
+                  <i class="bi bi-heart-pulse"></i>
+                </div>
+                <span class="badge bg-secondary-subtle text-secondary small">75 mins</span>
+              </div>
+              <h5 class="fw-bold mb-1">Herbal Aromatherapy Massage</h5>
+              <p class="khmer-font text-muted small mb-2">ម៉ាស្សាប្រេងក្រអូបបុរាណ កាត់បន្ថយការចុកស្រពន់</p>
+              <p class="text-muted small mb-3">Full body tension release using warm natural botanical oils, hot herbal compress, and pressure point therapy.</p>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <div class="service-price">$30</div>
+                <div class="service-khr">~123,000 ៛</div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm rounded-3 fw-bold" onclick="selectAndBook('Herbal Aromatherapy Massage', '$30 (~123,000៛)', 75)">
+                Book This <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="col-lg-4 col-md-6 service-item" data-category="facial">
+          <div class="service-card">
+            <div>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="service-icon-box" style="background: #e0f2fe; color: #0284c7;">
+                  <i class="bi bi-moisture"></i>
+                </div>
+                <span class="badge bg-secondary-subtle text-secondary small">50 mins</span>
+              </div>
+              <h5 class="fw-bold mb-1">Acne Clarifying &amp; Calming Detox</h5>
+              <p class="khmer-font text-muted small mb-2">ព្យាបាលមុន និងបន្ធូរបន្ថយការរលាកស្បែក</p>
+              <p class="text-muted small mb-3">Gentle extraction, tea tree antibacterial treatment, calming aloe pack, and cryo-globe soothing.</p>
+            </div>
+            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+              <div>
+                <div class="service-price">$22</div>
+                <div class="service-khr">~90,000 ៛</div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm rounded-3 fw-bold" onclick="selectAndBook('Acne Clarifying & Calming Detox', '$22 (~90,000៛)', 50)">
+                Book This <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Studio Locations & Operating Hours -->
+  <section id="branches" class="py-5 bg-light">
+    <div class="container py-4">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="text-primary fw-bold text-uppercase small tracking-wide">Our Studios</span>
+        <h2 class="fw-bold display-6 mt-1 mb-2">Locations &amp; Contact</h2>
+        <p class="text-muted">Serving clients daily with complimentary herbal tea and private treatment rooms.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="bg-white p-4 rounded-4 border h-100">
+            <span class="badge bg-primary mb-2">Main Studio</span>
+            <h4 class="fw-bold mb-2">Battambang Studio</h4>
+            <p class="text-muted small mb-3">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Street 119, Sangkat Svay Por, Battambang City, Cambodia.
+            </p>
+            <div class="d-flex flex-column gap-2 small text-muted mb-4">
+              <div><i class="bi bi-clock text-primary me-2"></i> <strong>Hours:</strong> Mon – Sun, 9:00 AM – 8:00 PM</div>
+              <div><i class="bi bi-telephone text-success me-2"></i> <strong>Phone:</strong> 012 884 921 / 098 451 209</div>
+              <div><i class="bi bi-telegram text-info me-2"></i> <strong>Telegram:</strong> @bNha_dev</div>
+            </div>
+            <button class="btn btn-outline-primary w-100 fw-bold" onclick="openBookingModal('Battambang Main Studio')">
+              Book at Battambang Studio
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="bg-white p-4 rounded-4 border h-100">
+            <span class="badge bg-secondary-subtle text-secondary mb-2">Branch 02</span>
+            <h4 class="fw-bold mb-2">Phnom Penh BKK1 Studio</h4>
+            <p class="text-muted small mb-3">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Street 288, Boeung Keng Kang 1 (BKK1), Phnom Penh, Cambodia.
+            </p>
+            <div class="d-flex flex-column gap-2 small text-muted mb-4">
+              <div><i class="bi bi-clock text-primary me-2"></i> <strong>Hours:</strong> Mon – Sun, 9:00 AM – 8:30 PM</div>
+              <div><i class="bi bi-telephone text-success me-2"></i> <strong>Phone:</strong> 070 339 811</div>
+              <div><i class="bi bi-telegram text-info me-2"></i> <strong>Telegram:</strong> @bNha_dev</div>
+            </div>
+            <button class="btn btn-outline-primary w-100 fw-bold" onclick="openBookingModal('Phnom Penh BKK1 Studio')">
+              Book at Phnom Penh Studio
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Reviews -->
+  <section id="reviews" class="py-5 bg-white border-top border-bottom">
+    <div class="container py-4">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="text-primary fw-bold text-uppercase small tracking-wide">Client Experiences</span>
+        <h2 class="fw-bold display-6 mt-1 mb-2">What Our Clients Say</h2>
+        <p class="text-muted">Real Cambodian reviews from our Battambang and Phnom Penh studios.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-4 bg-light rounded-4 border h-100">
+            <div class="text-warning mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <p class="small text-muted mb-3">
+              “ស្រួលកក់ណាស់ មិនបាច់ចាំឆ្លើយឆ្លង messenger យូរទេ! កក់តាម web ភ្លាម Telegram alert ភ្លាម ហើយពេលទៅដល់មិនចាំបាច់រង់ចាំយូរទេ។”
+            </p>
+            <div class="fw-bold text-dark">Sokha M.</div>
+            <small class="text-muted">Battambang Studio · Hydra-Glow Facial</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="p-4 bg-light rounded-4 border h-100">
+            <div class="text-warning mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <p class="small text-muted mb-3">
+              “Very clean environment and clear prices upfront in both USD and Khmer Riel. Stylist Dara cut my hair exactly as requested. Highly recommend!”
+            </p>
+            <div class="fw-bold text-dark">Dara H.</div>
+            <small class="text-muted">Phnom Penh BKK1 · Hair Cut &amp; Gloss</small>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="p-4 bg-light rounded-4 border h-100">
+            <div class="text-warning mb-2">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <p class="small text-muted mb-3">
+              “I love that there is zero advance deposit required. I paid via KHQR Bakong at the front desk right after my nail appointment.”
+            </p>
+            <div class="fw-bold text-dark">Channary P.</div>
+            <small class="text-muted">Battambang Studio · Gel Nail Art</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Booking Wizard Modal -->
+  <div class="modal fade booking-modal" id="bookingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header-aura d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="modal-title fw-bold text-white mb-0">Book Your Appointment</h5>
+            <small class="text-white-50 khmer-font">កក់ម៉ោងងាយស្រួល ៣ ជំហាន · មិនបាច់បង្កើតគណនី</small>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body p-4 p-md-5">
+          <!-- Step Indicator -->
+          <div class="step-indicator">
+            <div class="step-line"></div>
+            <div class="step-item active" id="stepIndicator1">
+              <div class="step-circle">1</div>
+              <div class="step-label">Service</div>
+            </div>
+            <div class="step-item" id="stepIndicator2">
+              <div class="step-circle">2</div>
+              <div class="step-label">Date &amp; Slot</div>
+            </div>
+            <div class="step-item" id="stepIndicator3">
+              <div class="step-circle">3</div>
+              <div class="step-label">Your Info</div>
+            </div>
+          </div>
+
+          <!-- Step 1: Service Selection -->
+          <div id="bookingStep1">
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Branch Location</label>
+              <select class="form-select" id="bookingBranch">
+                <option value="Battambang Main Studio">Battambang Main Studio (Street 119)</option>
+                <option value="Phnom Penh BKK1 Studio">Phnom Penh BKK1 Studio (Street 288)</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Select Service</label>
+              <select class="form-select form-select-lg" id="bookingService" onchange="onServiceChange()">
+                <option value="Hydra-Glow Facial Therapy" data-price="$28 (~115,000៛)">Hydra-Glow Facial Therapy — $28 (~115,000៛)</option>
+                <option value="Signature Hair Cut & Wash" data-price="$12 (~49,000៛)">Signature Hair Cut &amp; Wash — $12 (~49,000៛)</option>
+                <option value="Korean Keratin Treatment" data-price="$35 (~144,000៛)">Korean Keratin Treatment — $35 (~144,000៛)</option>
+                <option value="Luxury Gel Nail Art & Pedicure" data-price="$18 (~74,000៛)">Luxury Gel Nail Art &amp; Pedicure — $18 (~74,000៛)</option>
+                <option value="Herbal Aromatherapy Massage" data-price="$30 (~123,000៛)">Herbal Aromatherapy Massage — $30 (~123,000៛)</option>
+                <option value="Acne Clarifying & Calming Detox" data-price="$22 (~90,000៛)">Acne Clarifying &amp; Calming Detox — $22 (~90,000៛)</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold small text-muted text-uppercase">Preferred Specialist</label>
+              <select class="form-select" id="bookingSpecialist">
+                <option value="Any Available Specialist">Any Available Specialist (Fastest)</option>
+                <option value="Bopha (Senior Esthetician)">Bopha (Senior Esthetician — Skin Care)</option>
+                <option value="Dara (Hair Director)">Dara (Hair Director — Styling &amp; Cuts)</option>
+                <option value="Lin (Nail Artist)">Lin (Nail Artist — Gel &amp; Nail Art)</option>
+                <option value="Srey Mao (Massage Therapist)">Srey Mao (Massage Therapist — Aromatherapy)</option>
+              </select>
+            </div>
+
+            <button class="btn btn-aura w-100 py-3 justify-content-center" onclick="goToStep(2)">
+              Continue to Date &amp; Time <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+
+          <!-- Step 2: Date & Slot Picker -->
+          <div id="bookingStep2" class="d-none">
+            <label class="form-label fw-bold small text-muted text-uppercase mb-2">Select Date</label>
+            <div class="date-strip mb-4" id="dateStripContainer">
+              <!-- Dynamically populated dates -->
+            </div>
+
+            <label class="form-label fw-bold small text-muted text-uppercase mb-2">Select Available Time Slot</label>
+            
+            <!-- Morning Slots -->
+            <div class="mb-3">
+              <div class="small fw-bold text-muted mb-2"><i class="bi bi-sun text-warning me-1"></i> Morning</div>
+              <div class="row g-2">
+                <div class="col-4"><button type="button" class="slot-btn" onclick="selectSlot(this, '09:00 AM - 10:00 AM')">09:00 AM</button></div>
+                <div class="col-4"><button type="button" class="slot-btn booked" title="Already booked">10:00 AM</button></div>
+                <div class="col-4"><button type="button" class="slot-btn" onclick="selectSlot(this, '11:00 AM - 12:00 PM')">11:00 AM</button></div>
+              </div>
+            </div>
+
+            <!-- Afternoon Slots -->
+            <div class="mb-3">
+              <div class="small fw-bold text-muted mb-2"><i class="bi bi-brightness-high text-primary me-1"></i> Afternoon</div>
+              <div class="row g-2">
+                <div class="col-4"><button type="button" class="slot-btn" onclick="selectSlot(this, '01:30 PM - 02:30 PM')">01:30 PM</button></div>
+                <div class="col-4"><button type="button" class="slot-btn" onclick="selectSlot(this, '02:30 PM - 03:30 PM')">02:30 PM</button></div>
+                <div class="col-4"><button type="button" class="slot-btn booked" title="Already booked">03:30 PM</button></div>
+              </div>
+            </div>
+
+            <!-- Evening Slots -->
+            <div class="mb-4">
+              <div class="small fw-bold text-muted mb-2"><i class="bi bi-moon-stars text-indigo me-1"></i> Evening</div>
+              <div class="row g-2">
+                <div class="col-4"><button type="button" class="slot-btn" onclick="selectSlot(this, '05:00 PM - 06:00 PM')">05:00 PM</button></div>
+                <div class="col-4"><button type="button" class="slot-btn" onclick="selectSlot(this, '06:00 PM - 07:00 PM')">06:00 PM</button></div>
+                <div class="col-4"><button type="button" class="slot-btn" onclick="selectSlot(this, '07:00 PM - 08:00 PM')">07:00 PM</button></div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-secondary py-3 px-4" onclick="goToStep(1)">
+                <i class="bi bi-arrow-left"></i> Back
+              </button>
+              <button class="btn btn-aura flex-grow-1 py-3 justify-content-center" id="btnContinueStep2" onclick="validateStep2AndContinue()" disabled>
+                Continue to Details <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Customer Information (Zero Registration) -->
+          <div id="bookingStep3" class="d-none">
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Full Name / ឈ្មោះ</label>
+              <input type="text" class="form-control form-control-lg" id="custName" placeholder="e.g. Sokha Kem" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Cambodian Phone Number / លេខទូរស័ព្ទ</label>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text kh-phone-prefix">🇰🇭 +855</span>
+                <input type="tel" class="form-control" id="custPhone" placeholder="012 345 678 (Smart / Cellcard / Metfone)" required>
+              </div>
+              <small class="text-muted">Enter your local phone number so we can reach you.</small>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Telegram Username / Username Telegram (Optional)</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light">@</span>
+                <input type="text" class="form-control" id="custTelegram" placeholder="username (optional for quick alerts)">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Special Requests / ចំណាំបន្ថែម (Optional)</label>
+              <textarea class="form-control" id="custNotes" rows="2" placeholder="e.g. Sensitive skin, organic products only"></textarea>
+            </div>
+
+            <!-- Payment Notice -->
+            <div class="payment-notice-card mb-4 d-flex align-items-center gap-3">
+              <i class="bi bi-shield-check fs-3 text-danger flex-shrink-0"></i>
+              <div>
+                <strong>Payment Policy:</strong> Zero deposit required. Pay at front desk after your service using <strong>Cash or KHQR Bakong</strong>.
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-secondary py-3 px-4" onclick="goToStep(2)">
+                <i class="bi bi-arrow-left"></i> Back
+              </button>
+              <button class="btn btn-aura flex-grow-1 py-3 justify-content-center" id="btnSubmitBooking" onclick="submitBooking()">
+                <i class="bi bi-check2-circle me-1"></i> Confirm Booking Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 4: Success Confirmation Screen -->
+          <div id="bookingStepSuccess" class="d-none text-center py-3">
+            <div class="mb-3">
+              <div class="brand-logo-badge mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.75rem; background: #10b981;">
+                <i class="bi bi-check-lg"></i>
+              </div>
+              <h4 class="fw-bold text-dark">Appointment Registered!</h4>
+              <p class="text-muted khmer-font small">ការកក់របស់អ្នកត្រូវបានកត់ត្រាជោគជ័យ! យើងបានបញ្ជូនដំណឹងទៅកាន់បុគ្គលិកហាងរួចរាល់។</p>
+            </div>
+
+            <div class="bg-light p-4 rounded-4 text-start border mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                <span class="text-muted small">Booking Reference</span>
+                <span class="fw-bold text-primary font-monospace fs-5" id="confirmRefCode">AUR-0000</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span class="text-muted">Service:</span>
+                <span class="fw-bold text-dark" id="confirmService">-</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span class="text-muted">Date &amp; Time:</span>
+                <span class="fw-bold text-dark" id="confirmDateTime">-</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2 small">
+                <span class="text-muted">Location:</span>
+                <span class="fw-bold text-dark" id="confirmBranch">-</span>
+              </div>
+              <div class="d-flex justify-content-between small">
+                <span class="text-muted">Customer Phone:</span>
+                <span class="fw-bold text-dark" id="confirmPhone">-</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column gap-2">
+              <a href="#" id="tgDirectReceiptLink" target="_blank" class="btn btn-telegram w-100 py-3 justify-content-center">
+                <i class="bi bi-telegram fs-5"></i> Open Front Desk on Telegram
+              </a>
+              <button class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">
+                Done &amp; Close
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        <div class="col-lg-5">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="brand-logo-badge">
+              <i class="bi bi-flower1"></i>
+            </div>
+            <h5 class="fw-bold mb-0 text-white">Aura<span class="text-primary">Studio</span></h5>
+          </div>
+          <p class="text-secondary small mb-3">
+            Mobile-first beauty and appointment system for Cambodian businesses. Engineered for zero wait times and automated Telegram dispatch.
+          </p>
+          <div class="text-secondary small">
+            &copy; 2026 Aura Studio · Developed by <a href="https://sophireak.github.io/" class="text-light fw-bold text-decoration-none">Sophireak (@bNha_dev)</a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h6 class="fw-bold text-white mb-3">Quick Links</h6>
+          <ul class="list-unstyled text-secondary small d-flex flex-column gap-2">
+            <li><a href="#services" class="text-secondary text-decoration-none">Services &amp; Pricing</a></li>
+            <li><a href="#branches" class="text-secondary text-decoration-none">Studio Locations</a></li>
+            <li><a href="#reviews" class="text-secondary text-decoration-none">Client Reviews</a></li>
+            <li><a href="admin.html" class="text-warning text-decoration-none fw-bold"><i class="bi bi-shield-lock me-1"></i> Front Desk Staff Admin</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <h6 class="fw-bold text-white mb-3">Direct Front Desk</h6>
+          <p class="text-secondary small mb-1"><i class="bi bi-telegram text-info me-2"></i> Telegram: @bNha_dev</p>
+          <p class="text-secondary small mb-1"><i class="bi bi-telephone text-success me-2"></i> Battambang: 012 884 921</p>
+          <p class="text-secondary small mb-1"><i class="bi bi-telephone text-success me-2"></i> Phnom Penh: 070 339 811</p>
+          <p class="text-secondary small"><i class="bi bi-qr-code text-danger me-2"></i> KHQR / Bakong Payments Supported</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Client Booking Application Logic -->
+  <script>
+    // State
+    let selectedDate = '';
+    let selectedTimeSlot = '';
+    let bookingModalInstance = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      bookingModalInstance = new bootstrap.Modal(document.getElementById('bookingModal'));
+      generateDateStrip();
+    });
+
+    function openBookingModal(preferredBranch = null) {
+      if (preferredBranch) {
+        document.getElementById('bookingBranch').value = preferredBranch;
+      }
+      goToStep(1);
+      bookingModalInstance.show();
+    }
+
+    function selectAndBook(serviceName, servicePrice, durationMinutes) {
+      const selectEl = document.getElementById('bookingService');
+      for (let i = 0; i < selectEl.options.length; i++) {
+        if (selectEl.options[i].value === serviceName) {
+          selectEl.selectedIndex = i;
+          break;
+        }
+      }
+      openBookingModal();
+    }
+
+    function onServiceChange() {
+      // reserved for future reactive pricing changes
+    }
+
+    function generateDateStrip() {
+      const container = document.getElementById('dateStripContainer');
+      container.innerHTML = '';
+
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+      const today = new Date();
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+
+        const isoDate = d.toISOString().split('T')[0];
+        const dayLabel = i === 0 ? 'Today' : (i === 1 ? 'Tmrw' : daysOfWeek[d.getDay()]);
+        const dateNum = d.getDate();
+        const monthLabel = months[d.getMonth()];
+
+        const card = document.createElement('div');
+        card.className = `date-card ${i === 0 ? 'active' : ''}`;
+        card.dataset.date = isoDate;
+        card.onclick = () => selectDate(card, isoDate);
+
+        card.innerHTML = `
+          <div class="small fw-bold">${dayLabel}</div>
+          <div class="fs-5 fw-bold my-1">${dateNum}</div>
+          <div class="text-muted small">${monthLabel}</div>
+        `;
+
+        container.appendChild(card);
+
+        if (i === 0) {
+          selectedDate = isoDate;
+        }
+      }
+    }
+
+    function selectDate(element, isoDate) {
+      document.querySelectorAll('.date-card').forEach(c => c.classList.remove('active'));
+      element.classList.add('active');
+      selectedDate = isoDate;
+    }
+
+    function selectSlot(element, slot) {
+      document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
+      element.classList.add('active');
+      selectedTimeSlot = slot;
+      document.getElementById('btnContinueStep2').disabled = false;
+    }
+
+    function validateStep2AndContinue() {
+      if (!selectedTimeSlot) {
+        alert('Please select an available time slot.');
+        return;
+      }
+      goToStep(3);
+    }
+
+    function goToStep(step) {
+      // Hide all steps
+      document.getElementById('bookingStep1').classList.add('d-none');
+      document.getElementById('bookingStep2').classList.add('d-none');
+      document.getElementById('bookingStep3').classList.add('d-none');
+      document.getElementById('bookingStepSuccess').classList.add('d-none');
+
+      // Update indicator
+      for (let i = 1; i <= 3; i++) {
+        const ind = document.getElementById(`stepIndicator${i}`);
+        ind.classList.remove('active', 'completed');
+        if (i < step) ind.classList.add('completed');
+        if (i === step) ind.classList.add('active');
+      }
+
+      if (step === 1) document.getElementById('bookingStep1').classList.remove('d-none');
+      if (step === 2) document.getElementById('bookingStep2').classList.remove('d-none');
+      if (step === 3) document.getElementById('bookingStep3').classList.remove('d-none');
+    }
+
+    async function submitBooking() {
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const telegram = document.getElementById('custTelegram').value.trim();
+      const notes = document.getElementById('custNotes').value.trim();
+      const serviceSelect = document.getElementById('bookingService');
+      const serviceName = serviceSelect.value;
+      const servicePrice = serviceSelect.options[serviceSelect.selectedIndex].dataset.price || '$25';
+      const branch = document.getElementById('bookingBranch').value;
+      const specialist = document.getElementById('bookingSpecialist').value;
+
+      if (!name) {
+        alert('Please enter your name.');
+        document.getElementById('custName').focus();
+        return;
+      }
+
+      if (!phone || phone.length < 8) {
+        alert('Please enter a valid Cambodian phone number (e.g. 012 345 678).');
+        document.getElementById('custPhone').focus();
+        return;
+      }
+
+      const submitBtn = document.getElementById('btnSubmitBooking');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Confirming...';
+
+      const bookingPayload = {
+        customerName: name,
+        customerPhone: phone,
+        customerTelegram: telegram,
+        notes: notes,
+        serviceName,
+        servicePrice,
+        branch,
+        specialist,
+        date: selectedDate,
+        timeSlot: selectedTimeSlot,
+        paymentMethod: 'Pay at Counter (Cash / KHQR)'
+      };
+
+      let bookingRef = 'AUR-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+
+      try {
+        const response = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bookingPayload)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          if (result.bookingId) bookingRef = result.bookingId;
+        }
+      } catch (err) {
+        console.warn('Network call failed, relying on local sync:', err);
+      }
+
+      // Save to localStorage so Staff Admin Portal immediately sees it
+      saveBookingLocally({
+        ...bookingPayload,
+        id: bookingRef,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      });
+
+      // Show success screen
+      document.getElementById('bookingStep1').classList.add('d-none');
+      document.getElementById('bookingStep2').classList.add('d-none');
+      document.getElementById('bookingStep3').classList.add('d-none');
+      document.getElementById('bookingStepSuccess').classList.remove('d-none');
+
+      document.getElementById('confirmRefCode').innerText = bookingRef;
+      document.getElementById('confirmService').innerText = serviceName;
+      document.getElementById('confirmDateTime').innerText = `${selectedDate} at ${selectedTimeSlot}`;
+      document.getElementById('confirmBranch').innerText = branch;
+      document.getElementById('confirmPhone').innerText = phone;
+
+      // Update Telegram direct receipt button
+      const tgMsg = encodeURIComponent(`Hi Aura Studio, I just booked ${serviceName} on ${selectedDate} at ${selectedTimeSlot}. My booking ref is ${bookingRef}. My phone is ${phone}.`);
+      document.getElementById('tgDirectReceiptLink').href = `https://t.me/bNha_dev?text=${tgMsg}`;
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Confirm Booking Now';
+    }
+
+    function saveBookingLocally(booking) {
+      try {
+        const existing = JSON.parse(localStorage.getItem('aura_appointments') || '[]');
+        existing.unshift(booking);
+        localStorage.setItem('aura_appointments', JSON.stringify(existing));
+      } catch (e) {
+        console.error('Storage error:', e);
+      }
+    }
+
+    function filterServices(category) {
+      document.querySelectorAll('.category-pill').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const items = document.querySelectorAll('.service-item');
+      items.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.classList.remove('d-none');
+        } else {
+          item.classList.add('d-none');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
